@@ -1,4 +1,4 @@
-# euc2016-erlang-prng: Erlang User Conference 2016 presentation source
+# euc2016-erlang-prng: Erlang User Conference 2016 presentation source for *Fifteen Ways to Leave Your Random Module*
 
 ## Slides
 
