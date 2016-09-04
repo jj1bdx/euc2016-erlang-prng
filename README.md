@@ -6,3 +6,6 @@
 * [PDF slides](https://github.com/jj1bdx/euc2016-erlang-prng/blob/master/slides/euc2016-rikitake-prng.pdf)
 * Slide contents dual-licensed in [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode) and/or [MIT License](https://jj1bdx.mit-license.org/).
 
+## Notes
+
+* See [Issue #1](https://github.com/jj1bdx/euc2016-erlang-prng/issues/1) about the presentation title (and the copyright hassles I had to deal with).
