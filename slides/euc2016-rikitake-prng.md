@@ -88,13 +88,11 @@ C23456 AMPERSAND SHOWS LINE CONTINUATION
 
 * AS183 is no longer safe in 2016; the period is too short
 * *Without explicit seeding the result is always the same*
-* Current seeding practice is easily exploited
+* Seeding with `erlang:now/0` can be easily exploited
 
 ```erlang
-%%% Don't do this!
 %%% erlang:now/1 is also deprecated since 18.0!
-_ = random:seed(erlang:now()),
-%%% So DON'T DO THIS!
+_ = random:seed(erlang:now()). % DON'T DO THIS!
 ```
 
 ^ Erlang's random module has three issues. The period of algorithm AS183 is simply too short. And you need to explicitly give the initial state, or seed, to the function. Otherwise it will always start from the same default seed value, and that is very bad, because it gives the predictability. Also, many people still seed the function with the deprecated erlang:now function, and this is also a very bad practice, because the seeding value can be easily guessed from the current time. 
@@ -113,7 +111,7 @@ _ = random:seed(erlang:now()),
 
 # Let's get down to the recipes
 
-^ OK so let's get down to the business, talking about the fifteen ways.
+^ OK let's get down to the business.
 
 ---
 
@@ -343,7 +341,7 @@ true
 * `rand:normal/0` gives normal distribution output $$x$$ of $$\sigma{}=1$$ (standard deviation) and $$\mu{}=\bar{x}=0$$ (mean value), based on fast ziggurat algorithm
 * Normal distribution represents [central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem), where sums independent random variables follow
 
-^ Rand module has a great feature, which is a function returns the normal distribution output. Normal distribution can be used for estimating errors of natural phenomena and other real-world behaviors.
+^ Rand module has a great new feature, which is a function returns the normal distribution output. Normal distribution can be used for estimating errors of natural phenomena and other real-world behaviors.
 
 ---
 
@@ -370,7 +368,7 @@ true
 # #11: Check orthogonality of random generators for concurrent/parallel operations
 
 * Each process must generate orthogonal sequences
-* Use jump functions for ensuring orthogonality on [Xorshift\*/+](http://xoroshiro.di.unimi.it/) ([exsplus116](https://github.com/jj1bdx/exsplus116) is jump-function ready)
+* Use jump functions for ensuring orthogonality on [Xorshift\*/+](http://xoroshiro.di.unimi.it/) ([exsplus116](https://github.com/jj1bdx/exsplus116) and [exs1024](https://github.com/jj1bdx/exs1024) are jump-function ready)
 * [`tinymt-erlang`](http://github.com/jj1bdx/tinymt-erlang/) can choose $$~2^{58}$$ parameters [($$2^{28}$$ subset available here)](https://github.com/jj1bdx/tinymtdc-longbatch/) (period: $$(2^{127}-1)$$, 32-bit output)
 
 ^ If you use the concurrently generated random numbers in the same task, each process must generate orthogonal sequences. In other words, the sequences may overlap and will give you a bad result if you don't seed carefully. To ensure non-overlapping sequences, there are two ways: using jump functions, or choosing different generation parameters. For Xorshift\*/+ alrorithms, jump functions are available. For TinyMT-Erlang, I've computed more than 200 million parameter sets, and they're on GitHub.
