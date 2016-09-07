@@ -19,7 +19,7 @@ Stockholm, Sweden
 
 ![right, fit](kenjiface-20150328-2.jpg)
 
-^ Hi, my name is Kenji Rikitake. I'm originally from Tokyo, Japan, and this is my first time at the Erlang User Conference, and eighth time on the Erlang Factory Series conferences.
+^ Hi, my name is Kenji Rikitake. I'm very glad to be here in Stockholm for the first time in my life. I'm originally from Tokyo, Japan, and this is my first time at the Erlang User Conference, and eighth time on the Erlang Factory Series conferences.
 
 ---
 
@@ -31,7 +31,7 @@ Stockholm, Sweden
 
 ... so *fourth* presentation this time!
 
-^ I've made three presentations on random numbers at three conferences sponsored by Erlang Solutions: Erlang Factory SF Bay Area 2011; London Erlang User Group on September 2013; and Erlang Factory SF Bay Area 2015. This is the fourth presentation on the topic of the random number module handling in Erlang/OTP.
+^ I've made three presentations on random numbers at three conferences sponsored by Erlang Solutions, in 2011, 2013, and 2015. This is the fourth presentation on the topic of the random number module handling in Erlang/OTP.
 
 ---
 
@@ -44,7 +44,7 @@ Stockholm, Sweden
 
 # Random module is already deprecated in OTP 19.0 and will be removed in OTP 20!
 
-^ Because the random module is already deprecated in OTP 19.0, and will be removed in OTP 20. OTP 20 will be coming next year in 2017. Time is running out.
+^ Because the random module is already deprecated in OTP 19.0, and will be removed in OTP 20. OTP 20 will be coming next year in 2017. Our time is running out, and so does yours.
 
 ---
 
@@ -58,7 +58,7 @@ Stockholm, Sweden
 
 [^2]: https://github.com/jj1bdx/as183-c
 
-^ Historically the random module code is called AS183. AS183 is published in 1982, designed for 16-bit computers, and has a relatively short period of approximately two to the power of 43. On 2014, I've shown a proof-of-concept code exploring this in less than 9 hours with C. So AS183 is no longer safe.
+^ Historically the random module code is called AS183. AS183 is published in 1982, designed for 16-bit computers, and has a relatively short period of approximately two to the power of 43. On 2014, I've shown a proof-of-concept code exploited this in less than 9 hours with C. So I have to conclude AS183 is no longer safe.
 
 ---
 
@@ -80,7 +80,7 @@ C23456 AMPERSAND SHOWS LINE CONTINUATION
 
 [^3]: Description of the RAND function in Excel, <https://support.microsoft.com/en-us/kb/828795>, modified by Kenji Rikitake for better readability (and FORTRAN 77 compatibility)
 
-^ This is a piece of code in FORTRAN. Microsoft also implemented an AS183 algorithm to Excel 2003 and showed this one in their documents. I chose FORTRAN because this was my first programming language in 1974.
+^ This is a piece of code for AS183 in FORTRAN. It's surprising to know that Microsoft also implemented an AS183 algorithm to Excel 2003 and showed this one in their documents. I chose FORTRAN because this was my first programming language in 1974. You can find a similar code in the random module.
 
 ---
 
@@ -332,7 +332,7 @@ true
 * `exs1024` has a sufficiently longer period than exsplus
 * `exs1024` takes less than x2 execution time than `exsplus`
 
-^ For a high-precision simulation purpose which requires a longer period, exs1024 will give a better result. The period is much longer, which is two to the poer of 1024, and the execution time won't be longer than twice as exsplus, according to our benchmarking test during the module development.
+^ For a high-precision simulation purpose which requires a longer period, exs1024 will give a better result. The period is much longer, which is two to the power of 1024, and the execution time is only a bit more longer than twice as exsplus, according to our benchmarking test during the module development.
 
 ---
 
@@ -351,7 +351,7 @@ true
 
 [^9]: By Mwtoews [[CC BY 2.5](http://creativecommons.org/licenses/by/2.5)] via Wikimedia Commons<br><https://commons.wikimedia.org/wiki/File%3AStandard_deviation_diagram.svg>
 
-^ This is a graph of normal distribution. The probability of mean values of the sums by adding the numbers shown on randomly thrown six-face dice will converge into this graph, where the mean value will be 3.5.
+^ This is a graph of normal distribution. The probability of mean values of the sums by adding the numbers shown on randomly thrown six-face dice will highly likely to be converged like into this graph, where the mean value will be 3.5.
 
 ---
 
@@ -361,7 +361,7 @@ true
 * The *extremely* long period may affect the results if the number of random samples is huge
 * [`sfmt-erlang`](https://github.com/jj1bdx/sfmt-erlang/) is a NIF-based implementation of 32-bit output streams and `rand`/`random` module compatible
 
-^ If you are really into running a simulation with huge number of samples for a long time, SIMD-oriented Fast Mersenne Twister, or SFMT, will be a good generator for you. The period is two to the power of 19937, which is extremely long. I've published an implementation on GitHub, which is as fast as the random module with NIFs, though I also publish the pure Erlang version.
+^ If you are really into running a simulation with huge number of samples for a long time, SIMD-oriented Fast Mersenne Twister, or SFMT, will be a good generator for you. The period is two to the power of 19937, which is extremely long. I've published an implementation on GitHub, which is as fast as the random module with NIFs. I also publish the pure Erlang version for those who want slower but safer code. This implementation is also available in the hex package manager.
 
 ---
 
@@ -371,7 +371,7 @@ true
 * Use jump functions for ensuring orthogonality on [Xorshift\*/+](http://xoroshiro.di.unimi.it/) ([exsplus116](https://github.com/jj1bdx/exsplus116) and [exs1024](https://github.com/jj1bdx/exs1024) are jump-function ready)
 * [`tinymt-erlang`](http://github.com/jj1bdx/tinymt-erlang/) can choose $$~2^{58}$$ parameters [($$2^{28}$$ subset available here)](https://github.com/jj1bdx/tinymtdc-longbatch/) (period: $$(2^{127}-1)$$, 32-bit output)
 
-^ If you use the concurrently generated random numbers in the same task, each process must generate orthogonal sequences. In other words, the sequences may overlap and will give you a bad result if you don't seed carefully. To ensure non-overlapping sequences, there are two ways: using jump functions, or choosing different generation parameters. For Xorshift\*/+ alrorithms, jump functions are available. For TinyMT-Erlang, I've computed more than 200 million parameter sets, and they're on GitHub.
+^ If you use the concurrently generated random numbers in the same task, each process must generate orthogonal sequences. In other words, the sequences may overlap and will give you a bad result if you don't seed carefully. To ensure non-overlapping sequences, there are two ways: using jump functions so that two arbitrary sequences guarantee the distance between the internal state space, or choosing different generation parameters for the orthogonality. For Xorshift\*/+ alrorithms, jump functions are available, which I recently wrote a pure-Erlang prototype. For TinyMT-Erlang, I've computed more than 200 million parameter sets, and they're on GitHub. And the TinyMT algorithm is available on the hex package manager too.
 
 ---
 
@@ -397,7 +397,7 @@ random:seed({A,B,C}).
 * Examples: [triq](https://github.com/krestenkrab/triq/pull/61), [rebar](https://github.com/rebar/rebar/pull/612)
 * Rewriting code is still better, though (see [a rebar3 commit](https://github.com/erlang/rebar3/commit/be79259e324e66ac2f948aed186474cb06a2ea85))
 
-^ Also, if you do have to make your application compatible with both random and rand modules, you can use a wrapper. Tuncer Ayaz has built a wrapper module called `erlang-rand-compat`, which uses rand module if available, or fall back to random module if not. He's put the code in triq and rebar too. I think, however, rewriting the code is still better. See rebar3 for the latest details.
+^ Also, if you do have to make your application compatible with both random and rand modules, you can use a wrapper. Tuncer Ayaz has built a wrapper module called `erlang-rand-compat`, which uses rand module if available, or fall back to random module if not. He's put the code in triq and rebar too. I think, however, rewriting the code is still better, even with a conditional compilation. See rebar3 for the latest details.
 
 ---
 
@@ -428,13 +428,13 @@ random:seed({A,B,C}).
 
 [^10]: ["There's Math.random(), and then there's Math.random()", V8 JavaScript Engine blog, 17-DEC-2015](http://v8project.blogspot.jp/2015/12/theres-mathrandom-and-then-theres.html)
 
-^ For the final section of this presentation, I'll show you another case of random number generation failure. At Erlang Factory SF Bay 2011, I chose a PHP5 case. This time, I'll show you a case of V8 JavaScript Engine, which was fixed on December 2015. In short, they were using an algorithm called MWC1616, which didn't have enough length of period which could be as small as 40 million or even less, and failed a test suite of TestU01, which I introduced in the former presentation page.
+^ To conclude this presentation, I'll show you another case of random number generation failure. At Erlang Factory SF Bay 2011, I chose a PHP5 case for the Windows. This time, I'll show you a case of V8 JavaScript Engine, which was fixed on December 2015. In short, they were using an algorithm called MWC1616, which didn't have enough length of period which could be as small as 40 million or even less, and failed a test suite of TestU01, which I introduced in the former presentation page.
 
 ---
 
 ![original](v8-random-pattern.png)
 
-^ Let's see the difference. The old one on the left showed visible horizontal lines. The new one, actually generated by Xorshift128+ algorithm, does not have such a problem. The good thing was the V8 development team fixed the bug. And even better was that Erlang rand module released on May 2015 had fixed this issue at least six months before the V8 Team did! 
+^ Let's see the difference. The old one on the left showed visible horizontal lines. The new one, actually generated by Xorshift128+ algorithm, does not have such a problem. The good thing was that the V8 development team fixed the bug. And even better thing was that Erlang rand module released on May 2015 had fixed this issue at least six months before the V8 Team did! 
 
 ---
 
@@ -445,7 +445,7 @@ random:seed({A,B,C}).
 * If you can't use 18.0 or later, **stop using random module** and use newer random number generator algorithms
 * **Test your code before releasing it into production!**
 
-^ Let me conclude the presentation by summarizing it. I strongly suggest you to use rand module now. There are already many ways of migration from random to rand module. If you're security conscious, use crypto module or `/dev/urandom`, with a hardware random number generator. If you don't use OTP 18 or later, please stop using random module, and use a newer algorithm. And for the general warning: do test your code before releasing it!
+^ Let me summarize the presentation. I strongly suggest you to use rand module now. There are already many ways of migration from random to rand module. If you're security conscious, use crypto module or `/dev/urandom`, with a hardware random number generator. If you don't use OTP 18 or later, please stop using random module, and use a newer algorithm, available as an external module. And for the general warning: do test your code before releasing it!
 
 
 ---
@@ -459,7 +459,7 @@ random:seed({A,B,C}).
 * Slides at <https://github.com/jj1bdx/euc2016-erlang-prng/>
 
 
-^ (Talk briefly) I'd like to thank Dan Gudmundsson for his contribution to the rand module overall development, Sebastiano Vigna for kindly testing and providing the Xorshift116+ algorithm for Erlang BEAM, and Erlang Solutions for giving me many chances of talking about this topic.
+^ I'd like to thank Dan Gudmundsson for his contribution to the rand module overall development and as a rigorous Erlang code optimizer, Sebastiano Vigna for kindly testing and providing the Xorshift116+ algorithm for Erlang BEAM which actually was requested by Dan, and Erlang Solutions for giving me many chances of talking about this topic. Without those people, the rand module would have never come into being.
 
 ---
 
