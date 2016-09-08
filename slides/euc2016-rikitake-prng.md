@@ -375,6 +375,12 @@ true
 
 ---
 
+![inline](keyspace-overlapped.jpg)![inline](keyspace-jump.jpg)
+
+^ This is a simple example of how overlapping of internal state progression happens. When you randomly choose the initial states, the result may overlap. When you use jump functions during the initialization phase, the result will not overlap so long as the number of elements of the generated sequence does not exceed the length of jumping.
+
+---
+
 # #12: Use non-random external modules for OTP 17.x or before
 
 * Use [exsplus116](https://github.com/jj1bdx/exsplus116), [exs64](https://github.com/jj1bdx/exs64), [exs1024](https://github.com/jj1bdx/exs1024) (with HiPE for speed)
@@ -387,7 +393,7 @@ true
 random:seed({A,B,C}).
 ```
 
-^ If you have to stick with OTP 17 or older, consider using external modules implementing the bettern random number algorithms. Those in OTP 18 or later rand module are all available. You can use SFMT and TinyMT too. Use `crypto:strong_rand_bytes/1` for properly seeding the functions.
+^ If you have to stick with OTP 17 or older, consider using external modules implementing the better random number algorithms. Those in OTP 18 or later rand module are all available. You can use SFMT and TinyMT too. Use `crypto:strong_rand_bytes/1` for properly seeding the functions.
 
 ---
 
